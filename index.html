@@ -33,7 +33,7 @@
                   <div v-for="variant in variants" :key="variant.id">
                     {{variant.color}}
                   </div>
-                  <button class="button">Add To Cart</button>
+                  <button class="button" v-on:click="addToCart">Add To Cart</button>
                 </div>
             </div>
        </div>
@@ -45,14 +45,19 @@
 
       createApp({
         setup() {
-          const message = ref("Hello vue!");
+          const cart = ref(0)
+          const addToCart = () => {
+            cart.value += 1
+          }
 
           return {
            product_title: ref("T-Shirt"),
             image: ref("./assets/images/t-shirt-blue.png"),
             inStock: ref(0),
             details: ['50% Cotton', '30% polyester', '20% wool'],
-            variants: [{id:1, color:'blue'}, {id:2, color:'green'}]
+            variants: [{id:1, color:'blue'}, {id:2, color:'green'}],
+            cart,
+            addToCart
           };
         },
       }).mount("#app");
