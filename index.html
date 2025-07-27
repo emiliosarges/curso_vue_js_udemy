@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Curso Vue 3</title>
 
+    <!-- Style -->
+    <link rel="stylesheet" href="assets/styles.css">
     <!--Vue CDN-->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </head>
@@ -13,9 +15,14 @@
        <div class="product-display">
             <div class="product-container">
                 <div class="product-image">
-                    <!--Imagem do Produto-->
+                    <!-- v-bind: pode ser abreviado somente com : -->
+                    <img :src="image" alt="img-product">
                 </div>
                 <div class="product-info">
+                  <h1>{{ product_title }}</h1>
+                  <p v-if="inStock > 10">In Stock</p>
+                  <p v-else-if="inStock < 10 && inStock > 1">Almost of out</p>
+                  <p v-else>Out of Stock</p>
                     <!-- Info do Produto -->
                 </div>
             </div>
@@ -31,7 +38,9 @@
           const message = ref("Hello vue!");
 
           return {
-            message
+           product_title: ref("T-Shirt"),
+            image: ref("./assets/images/t-shirt-blue.png"),
+            inStock: ref(0)
           };
         },
       }).mount("#app");
